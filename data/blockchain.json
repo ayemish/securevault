@@ -1,0 +1,311 @@
+{
+  "difficulty": 3,
+  "chain": [
+    {
+      "index": 0,
+      "timestamp": 1778949882.1093984,
+      "event_type": "GENESIS",
+      "event_data": {
+        "message": "SecureVault Blockchain Initialized"
+      },
+      "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "nonce": 5606,
+      "block_hash": "000f76e19a3906d281f9903f434ae8bec8d38fd43fbc348f36cb40158fd03a58"
+    },
+    {
+      "index": 1,
+      "timestamp": 1778949959.1562023,
+      "event_type": "ENCRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "ciphertext": "oiwwv qj yhqp tz ejptmds"
+      },
+      "previous_hash": "000f76e19a3906d281f9903f434ae8bec8d38fd43fbc348f36cb40158fd03a58",
+      "nonce": 5988,
+      "block_hash": "000919404fd52cb797c1acbacb2ab0822b4668701da95313b4fb8e7c2d8e2a27"
+    },
+    {
+      "index": 2,
+      "timestamp": 1778949959.2282033,
+      "event_type": "HASH",
+      "event_data": {
+        "algorithm": "sha256",
+        "digest": "1ce6be929eb36f1fa0ed..."
+      },
+      "previous_hash": "000919404fd52cb797c1acbacb2ab0822b4668701da95313b4fb8e7c2d8e2a27",
+      "nonce": 3186,
+      "block_hash": "00051a646cd13369b5df7de950659280a139c785ac652b5b88443c566ee8c010"
+    },
+    {
+      "index": 3,
+      "timestamp": 1778949959.267851,
+      "event_type": "HMAC",
+      "event_data": {
+        "hmac": "1bb9aad38122d78b716c..."
+      },
+      "previous_hash": "00051a646cd13369b5df7de950659280a139c785ac652b5b88443c566ee8c010",
+      "nonce": 1867,
+      "block_hash": "000d6b99ce3849c55df1698457b46a4383e6b4a3ce501f83c0af72196c3e5c04"
+    },
+    {
+      "index": 4,
+      "timestamp": 1778949959.2945776,
+      "event_type": "KEY_EXCHANGE",
+      "event_data": {
+        "method": "Diffie-Hellman",
+        "match": "True"
+      },
+      "previous_hash": "000d6b99ce3849c55df1698457b46a4383e6b4a3ce501f83c0af72196c3e5c04",
+      "nonce": 5737,
+      "block_hash": "000131e0606555a80a3d367e1f0b7e5838c61378bf8709ec5f5b6c8255d80315"
+    },
+    {
+      "index": 5,
+      "timestamp": 1778949959.4233077,
+      "event_type": "DECRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "match": "True"
+      },
+      "previous_hash": "000131e0606555a80a3d367e1f0b7e5838c61378bf8709ec5f5b6c8255d80315",
+      "nonce": 615,
+      "block_hash": "000d55601619e3cccc88f59ee9f09052e0e32566a2f34dd7f0b014eea59780b1"
+    },
+    {
+      "index": 6,
+      "timestamp": 1778950214.558485,
+      "event_type": "ENCRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "ciphertext": "omstv"
+      },
+      "previous_hash": "000d55601619e3cccc88f59ee9f09052e0e32566a2f34dd7f0b014eea59780b1",
+      "nonce": 4166,
+      "block_hash": "000a414dce0027b651228d8937290419d22ba6266b8abe9ced246a7770e2a36c"
+    },
+    {
+      "index": 7,
+      "timestamp": 1778950214.606926,
+      "event_type": "HASH",
+      "event_data": {
+        "algorithm": "sha256",
+        "digest": "d6ea66f27ada72ffb9c8..."
+      },
+      "previous_hash": "000a414dce0027b651228d8937290419d22ba6266b8abe9ced246a7770e2a36c",
+      "nonce": 457,
+      "block_hash": "0008dcd3a2f3fe7ce52a3c91b145c0c4057b9188bdeef82dca892e305351a643"
+    },
+    {
+      "index": 8,
+      "timestamp": 1778950214.616624,
+      "event_type": "HMAC",
+      "event_data": {
+        "hmac": "fa642288bbfff693e84e..."
+      },
+      "previous_hash": "0008dcd3a2f3fe7ce52a3c91b145c0c4057b9188bdeef82dca892e305351a643",
+      "nonce": 1882,
+      "block_hash": "000a52a7b01de87d212b2d885b154c1155df495a18ec24a94c3dd8778b9e4d89"
+    },
+    {
+      "index": 9,
+      "timestamp": 1778950214.6544425,
+      "event_type": "KEY_EXCHANGE",
+      "event_data": {
+        "method": "Diffie-Hellman",
+        "match": "True"
+      },
+      "previous_hash": "000a52a7b01de87d212b2d885b154c1155df495a18ec24a94c3dd8778b9e4d89",
+      "nonce": 2406,
+      "block_hash": "0003f0716b80a985e9d64fa8f44d41feed63050881e7a302c81b83f9893936eb"
+    },
+    {
+      "index": 10,
+      "timestamp": 1778950214.6999826,
+      "event_type": "DECRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "match": "True"
+      },
+      "previous_hash": "0003f0716b80a985e9d64fa8f44d41feed63050881e7a302c81b83f9893936eb",
+      "nonce": 170,
+      "block_hash": "000d907501be4ed40a4ce5cb12f87a68ffa5af351be0d95b25703d2e7b065ddf"
+    },
+    {
+      "index": 11,
+      "timestamp": 1778950435.7804275,
+      "event_type": "ENCRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "ciphertext": "hglupao"
+      },
+      "previous_hash": "000d907501be4ed40a4ce5cb12f87a68ffa5af351be0d95b25703d2e7b065ddf",
+      "nonce": 10496,
+      "block_hash": "000a32b014825a310df34ddaf4f392242712631f30b67c6059c0aec78bfc1bee"
+    },
+    {
+      "index": 12,
+      "timestamp": 1778950435.8916674,
+      "event_type": "HASH",
+      "event_data": {
+        "algorithm": "sha256",
+        "digest": "4540ec27524a8103b65b..."
+      },
+      "previous_hash": "000a32b014825a310df34ddaf4f392242712631f30b67c6059c0aec78bfc1bee",
+      "nonce": 2960,
+      "block_hash": "00043a2b0bf4fc702e0a43bfd7648e35256523601fc5acb06385c287d8faabd4"
+    },
+    {
+      "index": 13,
+      "timestamp": 1778950435.9259832,
+      "event_type": "HMAC",
+      "event_data": {
+        "hmac": "5840de0d746ede0b319a..."
+      },
+      "previous_hash": "00043a2b0bf4fc702e0a43bfd7648e35256523601fc5acb06385c287d8faabd4",
+      "nonce": 88,
+      "block_hash": "0008492354a805e10b411bb9dbe053363ebedd08e05b3b2e1f1b1eac955d4fb3"
+    },
+    {
+      "index": 14,
+      "timestamp": 1778950435.93813,
+      "event_type": "KEY_EXCHANGE",
+      "event_data": {
+        "method": "Diffie-Hellman",
+        "match": "True"
+      },
+      "previous_hash": "0008492354a805e10b411bb9dbe053363ebedd08e05b3b2e1f1b1eac955d4fb3",
+      "nonce": 14211,
+      "block_hash": "000fc80f57fca3d1a5fc1b62376e964f0ad9848bc31395f8e7c9164b740311e1"
+    },
+    {
+      "index": 15,
+      "timestamp": 1778950436.0875044,
+      "event_type": "DECRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "match": "True"
+      },
+      "previous_hash": "000fc80f57fca3d1a5fc1b62376e964f0ad9848bc31395f8e7c9164b740311e1",
+      "nonce": 7493,
+      "block_hash": "000c3b619aaeff1eede0dd4e6a1aaa6e6e0e0d192841f6846c89a03eb09560fc"
+    },
+    {
+      "index": 16,
+      "timestamp": 1778950469.0155184,
+      "event_type": "ENCRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "ciphertext": "hglupao"
+      },
+      "previous_hash": "000c3b619aaeff1eede0dd4e6a1aaa6e6e0e0d192841f6846c89a03eb09560fc",
+      "nonce": 4420,
+      "block_hash": "0005ed777a3069ed7c4eed657d15fe0d1185d54e093885b7362e4aa917617c8b"
+    },
+    {
+      "index": 17,
+      "timestamp": 1778950469.0655491,
+      "event_type": "HASH",
+      "event_data": {
+        "algorithm": "sha256",
+        "digest": "4540ec27524a8103b65b..."
+      },
+      "previous_hash": "0005ed777a3069ed7c4eed657d15fe0d1185d54e093885b7362e4aa917617c8b",
+      "nonce": 3015,
+      "block_hash": "000055acc2ff5973d99a2dbd04459ba2facbe587942c0aab313fe7982d3bd266"
+    },
+    {
+      "index": 18,
+      "timestamp": 1778950469.101891,
+      "event_type": "HMAC",
+      "event_data": {
+        "hmac": "5840de0d746ede0b319a..."
+      },
+      "previous_hash": "000055acc2ff5973d99a2dbd04459ba2facbe587942c0aab313fe7982d3bd266",
+      "nonce": 1933,
+      "block_hash": "000753b6c592415e997aa02c43e6eb6e31c33a2fd2e8d50dcf9d936b1b8eaa13"
+    },
+    {
+      "index": 19,
+      "timestamp": 1778950469.147138,
+      "event_type": "KEY_EXCHANGE",
+      "event_data": {
+        "method": "Diffie-Hellman",
+        "match": "True"
+      },
+      "previous_hash": "000753b6c592415e997aa02c43e6eb6e31c33a2fd2e8d50dcf9d936b1b8eaa13",
+      "nonce": 5323,
+      "block_hash": "000973fc1181503e7e75e11a163d97f6840f335a3b7d295e0c8da609a4d9176a"
+    },
+    {
+      "index": 20,
+      "timestamp": 1778950469.2019815,
+      "event_type": "DECRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "match": "True"
+      },
+      "previous_hash": "000973fc1181503e7e75e11a163d97f6840f335a3b7d295e0c8da609a4d9176a",
+      "nonce": 9965,
+      "block_hash": "0002e1de0559da8a800ec980a2cc7159c669a527f3e8fc5268801882c2f72b1f"
+    },
+    {
+      "index": 21,
+      "timestamp": 1778950565.210971,
+      "event_type": "ENCRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "ciphertext": "hglupao"
+      },
+      "previous_hash": "0002e1de0559da8a800ec980a2cc7159c669a527f3e8fc5268801882c2f72b1f",
+      "nonce": 5398,
+      "block_hash": "000757ea40787b1c0a1028f5b79206248d784233c68d3d867e9705f645294e77"
+    },
+    {
+      "index": 22,
+      "timestamp": 1778950565.2725024,
+      "event_type": "HASH",
+      "event_data": {
+        "algorithm": "sha256",
+        "digest": "4540ec27524a8103b65b..."
+      },
+      "previous_hash": "000757ea40787b1c0a1028f5b79206248d784233c68d3d867e9705f645294e77",
+      "nonce": 1699,
+      "block_hash": "0006db883de0b7dc2e395a60a6f15bf1dde38d7de311802c4053ac4cd371d963"
+    },
+    {
+      "index": 23,
+      "timestamp": 1778950565.29093,
+      "event_type": "HMAC",
+      "event_data": {
+        "hmac": "5840de0d746ede0b319a..."
+      },
+      "previous_hash": "0006db883de0b7dc2e395a60a6f15bf1dde38d7de311802c4053ac4cd371d963",
+      "nonce": 1022,
+      "block_hash": "000e09c5bc4c95718adba5e227ddb72bfd1a5efd3bc5455c81b2ff5020bbe042"
+    },
+    {
+      "index": 24,
+      "timestamp": 1778950565.3137343,
+      "event_type": "KEY_EXCHANGE",
+      "event_data": {
+        "method": "Diffie-Hellman",
+        "match": "True"
+      },
+      "previous_hash": "000e09c5bc4c95718adba5e227ddb72bfd1a5efd3bc5455c81b2ff5020bbe042",
+      "nonce": 3958,
+      "block_hash": "0008a1687863d20e7042280e924b95f08516dd41db865c8c3faea7349af09a11"
+    },
+    {
+      "index": 25,
+      "timestamp": 1778950565.3677819,
+      "event_type": "DECRYPT",
+      "event_data": {
+        "module": "Vigenere",
+        "match": "True"
+      },
+      "previous_hash": "0008a1687863d20e7042280e924b95f08516dd41db865c8c3faea7349af09a11",
+      "nonce": 1708,
+      "block_hash": "00036381b1867b99dbcb268f7dea0f0020d3d6140304377505ab0b23095b3720"
+    }
+  ]
+}
