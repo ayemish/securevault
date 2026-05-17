@@ -371,7 +371,8 @@ def dh_full_demo():
     print()
 
     # Derive a simple session key (first 16 bytes of secret)
-    secret_bytes = alice_secret.to_bytes(64, byteorder='big')
+    byte_length = (alice_secret.bit_length() + 7) // 8
+    secret_bytes = alice_secret.to_bytes(byte_length, byteorder='big')
     session_key = secret_bytes[:16]
     print(f"  Session key (hex): {session_key.hex()}")
 
