@@ -870,75 +870,93 @@ class SecureVaultApp:
         out = make_output(parent, height=18)
         out.pack(padx=24, pady=8, fill='x')
 
+        def append(text):
+            out.config(state='normal')
+            out.insert(tk.END, text + '\n')
+            out.see(tk.END)
+            out.config(state='disabled')
+            out.update_idletasks()
+
         def do_sim():
+            # Clear output
+            out.config(state='normal')
+            out.delete('1.0', tk.END)
+            out.config(state='disabled')
+
             self.set_status("Running simulation...", ACCENT)
-            output_write(out, "Starting simulation...\n")
 
-            import queue as _queue
-            import time as _time
+            def run():
+                import queue as _queue
+                import time as _time
 
-            a2b = _queue.Queue()
-            b2a = _queue.Queue()
-            log_q = _queue.Queue()
-            results = {}
+                a2b   = _queue.Queue()
+                b2a   = _queue.Queue()
+                log_q = _queue.Queue()
+                results = {}
 
-            def append(text):
-                out.config(state='normal')
-                out.insert(tk.END, text + '\n')
-                out.see(tk.END)
-                out.config(state='disabled')
+                def safe_append(text):
+                    # Schedule UI update on main thread
+                    self.root.after(0, append, text)
+                    _time.sleep(0.05)  # small delay so output is readable
 
-            def alice():
-                _time.sleep(0.2)
-                a = dh_generate_private_key(DH_PRIME_512)
-                A = dh_compute_public_key(a, DH_GENERATOR, DH_PRIME_512)
-                append(f"[Alice] Private key a = ...{str(a)[-8:]}")
-                append(f"[Alice] Sending public key A = ...{str(A)[-8:]}")
-                a2b.put(A); log_q.put(('A', A))
-                B = b2a.get()
-                append(f"[Alice] Received Bob's key B = ...{str(B)[-8:]}")
-                secret = dh_compute_shared_secret(B, a, DH_PRIME_512)
-                append(f"[Alice] Shared secret = ...{str(secret)[-14:]}")
-                results['alice'] = secret
+                def alice():
+                    _time.sleep(0.2)
+                    a = dh_generate_private_key(DH_PRIME_512)
+                    A = dh_compute_public_key(a, DH_GENERATOR, DH_PRIME_512)
+                    safe_append(f"[Alice] Generated private key a = ...{str(a)[-8:]}")
+                    safe_append(f"[Alice] Computed  public  key A = ...{str(A)[-8:]}")
+                    safe_append(f"[Alice] Sending A over public channel...")
+                    a2b.put(A)
+                    log_q.put(('A', A))
+                    B = b2a.get(timeout=15)
+                    safe_append(f"[Alice] Received Bob's key   B = ...{str(B)[-8:]}")
+                    secret = dh_compute_shared_secret(B, a, DH_PRIME_512)
+                    safe_append(f"[Alice] Shared secret = ...{str(secret)[-14:]}")
+                    results['alice'] = secret
 
-            def bob():
-                _time.sleep(0.4)
-                b = dh_generate_private_key(DH_PRIME_512)
-                B = dh_compute_public_key(b, DH_GENERATOR, DH_PRIME_512)
-                append(f"[Bob  ] Private key b = ...{str(b)[-8:]}")
-                A = a2b.get()
-                append(f"[Bob  ] Received Alice's key A = ...{str(A)[-8:]}")
-                append(f"[Bob  ] Sending public key B = ...{str(B)[-8:]}")
-                b2a.put(B); log_q.put(('B', B))
-                secret = dh_compute_shared_secret(A, b, DH_PRIME_512)
-                append(f"[Bob  ] Shared secret = ...{str(secret)[-14:]}")
-                results['bob'] = secret
+                def bob():
+                    _time.sleep(0.5)
+                    b = dh_generate_private_key(DH_PRIME_512)
+                    B = dh_compute_public_key(b, DH_GENERATOR, DH_PRIME_512)
+                    safe_append(f"[Bob  ] Generated private key b = ...{str(b)[-8:]}")
+                    safe_append(f"[Bob  ] Computed  public  key B = ...{str(B)[-8:]}")
+                    A = a2b.get(timeout=15)
+                    safe_append(f"[Bob  ] Received Alice's key  A = ...{str(A)[-8:]}")
+                    safe_append(f"[Bob  ] Sending B over public channel...")
+                    b2a.put(B)
+                    log_q.put(('B', B))
+                    secret = dh_compute_shared_secret(A, b, DH_PRIME_512)
+                    safe_append(f"[Bob  ] Shared secret = ...{str(secret)[-14:]}")
+                    results['bob'] = secret
 
-            def eve():
-                seen = {}
-                while len(seen) < 2:
-                    try:
-                        k, v = log_q.get(timeout=8)
-                        seen[k] = v
-                        append(f"[Eve  ] Intercepted key {k} = ...{str(v)[-8:]}")
-                    except: break
-                append("[Eve  ] Has both public keys but CANNOT compute secret.")
-                append("[Eve  ] Discrete log is computationally infeasible. Giving up.")
+                def eve():
+                    seen = {}
+                    while len(seen) < 2:
+                        try:
+                            k, v = log_q.get(timeout=10)
+                            seen[k] = v
+                            safe_append(f"[Eve  ] Intercepted key {k} = ...{str(v)[-8:]}")
+                        except:
+                            break
+                    safe_append("[Eve  ] Has both public keys but CANNOT compute the secret.")
+                    safe_append("[Eve  ] Discrete log is computationally infeasible. Giving up.")
 
-            ta = threading.Thread(target=alice, daemon=True)
-            tb = threading.Thread(target=bob,   daemon=True)
-            te = threading.Thread(target=eve,   daemon=True)
-            ta.start(); tb.start(); te.start()
-            ta.join();  tb.join();  te.join()
+                ta = threading.Thread(target=alice, daemon=True)
+                tb = threading.Thread(target=bob,   daemon=True)
+                te = threading.Thread(target=eve,   daemon=True)
+                ta.start(); tb.start(); te.start()
+                ta.join();  tb.join();  te.join()
 
-            match = results.get('alice') == results.get('bob')
-            append(f"\n{'─'*40}")
-            append(f"Secrets match: {match}")
-            append(f"{'[+] Secure channel established!' if match else '[!] Mismatch'}")
-            self.set_status("Network simulation complete.", ACCENT2)
+                match = results.get('alice') == results.get('bob')
+                self.root.after(0, append, "─" * 40)
+                self.root.after(0, append, f"Secrets match : {match}")
+                self.root.after(0, append, f"{'[+] Secure channel established!' if match else '[!] Mismatch'}")
+                self.root.after(0, self.set_status, "Simulation complete.", ACCENT2)
+
+            # Run everything in one background thread — GUI stays responsive
+            threading.Thread(target=run, daemon=True).start()
 
         make_button(parent, "Run Simulation", do_sim).pack(padx=24, anchor='w', pady=4)
-
 
     def _panel_merkle(self, parent):
         self._section(parent, "Bonus — Merkle Tree", "+2 marks  |  Built from blockchain block hashes")
