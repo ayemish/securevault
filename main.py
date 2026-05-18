@@ -1,3 +1,4 @@
+import utils.session
 from utils import display_banner, print_separator, clear_screen
 
 from module1_classical import module1_menu

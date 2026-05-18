@@ -85,24 +85,24 @@ class TestPBKDF2(unittest.TestCase):
 
     def test_hash_password_returns_json(self):
         import json
-        stored = hash_password("mypassword", iterations=1000)
+        stored = hash_password("mypassword", iterations=100000)
         parsed = json.loads(stored)
         self.assertIn("salt", parsed)
         self.assertIn("hash", parsed)
         self.assertIn("iterations", parsed)
 
     def test_verify_correct_password(self):
-        stored = hash_password("correcthorse", iterations=1000)
+        stored = hash_password("correcthorse", iterations=100000)
         self.assertTrue(verify_password("correcthorse", stored))
 
     def test_verify_wrong_password(self):
-        stored = hash_password("correcthorse", iterations=1000)
+        stored = hash_password("correcthorse", iterations=100000)
         self.assertFalse(verify_password("wrongpassword", stored))
 
     def test_two_hashes_of_same_password_differ(self):
         # Different salts each time
-        s1 = hash_password("mypassword", iterations=1000)
-        s2 = hash_password("mypassword", iterations=1000)
+        s1 = hash_password("mypassword", iterations=100000)
+        s2 = hash_password("mypassword", iterations=100000)
         self.assertNotEqual(s1, s2)
 
     def test_low_iterations_raises(self):
