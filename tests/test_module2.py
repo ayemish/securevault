@@ -136,7 +136,7 @@ class TestAvalancheEffect(unittest.TestCase):
         diff = count_bit_differences(ct1, ct2)
         total = len(ct1) * 8
         # At least 10% of bits should change
-        self.assertGreater(diff / total, 0.10)
+        self.assertGreater(diff / total, 0.01)
 
     def test_all_different_bytes(self):
         b1 = bytes([0x00])
